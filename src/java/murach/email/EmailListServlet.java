@@ -31,15 +31,12 @@ public class EmailListServlet extends HttpServlet {
             // get parameters from the request
             String firstName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");
-            String email = request.getParameter("email");
-            String strYear = request.getParameter("year");
-            int year=Integer.parseInt(strYear);
-            
+            String email = request.getParameter("email");            
             GregorianCalendar currentDate = new GregorianCalendar();
-            int currentYear = currentDate.get(Calendar.YEAR);
+            int year = currentDate.get(Calendar.YEAR);
     
             // store data in User object
-            User user = new User(firstName, lastName, email,year);
+            User user = new User(firstName, lastName, email);
 
             // validate the parameters
             String message;
@@ -55,6 +52,7 @@ public class EmailListServlet extends HttpServlet {
             }
             request.setAttribute("user", user);
             request.setAttribute("message", message);
+            request.setAttribute("year", year);
         }
         getServletContext()
                 .getRequestDispatcher(url)
